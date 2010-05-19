@@ -1,0 +1,54 @@
+<% @page_title = human_model_name.humanize.pluralize %>
+
+<%= partial 'admin/shared/collection_option_links' %>
+
+<% unless @headers.empty? %>
+<table class="index">
+  <tr>
+    <th>Image</th>
+    <th>Strapline</th>
+    <th>Url</th>
+    <th>Visible</th>
+    <th>Actions</th>
+  </tr>
+
+  <tbody id="headers">
+    <% @headers.each do |header| %>
+    <tr id="header-<%= header.id %>">
+      <td><%= image_tag header.photo.url(:thumb) %></td>
+      <td><%=h header.strapline %></td>
+      <td><%=h header.url %></td>
+      <td><%=h header.visible %></td>
+      <td>
+        <%= link_to_with_icon 'edit', 'Edit', edit_object_url(header) %> &nbsp;
+        <%= link_to "#{image_tag('/images/admin/delete.gif')} Delete", admin_header_url(header), :method => :delete, :confirm => 'Are you sure?' %> &nbsp;
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+  
+</table>
+<%= will_paginate collection %>
+
+<% content_for :head do -%>
+  <%= javascript_include_tag 'jquery.js', 'jquery.tablednd_0_5.js' %>
+  <script type="text/javascript" charset="utf-8">
+    $().ready(function() {
+      $('#headers').tableDnD({
+        onDrop: function(table, row) {
+          $.ajax({
+             type: "POST",
+             url: "<%= url_for(:action => 'sort') %>",
+             processData: false,
+             data: $.tableDnD.serialize() + '&authenticity_token=' + encodeURIComponent('<%= form_authenticity_token if protect_against_forgery? %>'),
+             success: function(msg) {
+               alert("The Headers have been updated")
+             }
+           });
+        }
+      })
+    })
+  </script>
+<% end -%>
+
+<% end %>

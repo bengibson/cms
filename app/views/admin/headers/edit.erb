@@ -1,0 +1,9 @@
+<% @page_title = "Editing #{human_model_name.humanize}" %>
+
+<%= partial 'admin/shared/object_option_links' %>
+
+<% form_for [:admin, @header], :html => {:multipart => true} do |header_form| %>
+
+<%= render :partial => 'form', :locals => { :header_form => header_form } %>
+
+<% end %>

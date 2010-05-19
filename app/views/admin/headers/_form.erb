@@ -1,0 +1,23 @@
+<fieldset>
+  <p> 
+    <%= header_form.label :visible %> in front-end
+    <%= header_form.check_box :visible %>
+  </p>
+  <p> 
+    <%= header_form.label :strapline %><br />
+    <%= header_form.text_field :strapline %>
+  </p>
+  <p>
+    <%= header_form.label :url %> (www.example.com)<br />
+    <%= header_form.text_field :url %>
+  </p>
+  
+  <p>
+    <%= header_form.label :photo %> (jpeg, gif or png)<br />
+    <%= header_form.file_field :photo %>
+    <%= header_form.error_message_on :photo %>
+  </p>
+  
+</fieldset>
+
+<%= render 'admin/generic/resource_buttons' %>

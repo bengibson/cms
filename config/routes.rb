@@ -5,7 +5,6 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
   map.login '/login', :controller => 'user_sessions', :action => 'new'
   
-
   # Admin Routes
   map.namespace(:admin) do |admin|
     admin.resources :pages, :collection => {
@@ -13,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
       :add_file_upload => :post, :delete_file_upload => :post, 
       :add_image => :post, :delete_image => :post, :reorder_images => :post, :sitemap => :get
       }
+    admin.resources :headers, :collection => { :sort => :post }
     admin.resources :images, :member => {:crop_settings => :get}
     admin.resources :file_uploads
     admin.resources :file_upload_categories
@@ -31,5 +31,5 @@ ActionController::Routing::Routes.draw do |map|
     m.view_page    '*slug_path.:format',      :action => 'view'
     m.view_page    '*slug_path',              :action => 'view'
   end
-
+  
 end

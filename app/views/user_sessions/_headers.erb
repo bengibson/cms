@@ -1,0 +1,31 @@
+<% unless @headers.empty? %>
+
+	<div id="slideshow">
+
+		<% @headers.each do |header| %>
+		<div class="slideshow_content">
+  		<a href="/" id="logo" title="return to homepage">Biglogobigger</a>
+			<p id="strapline"><%=h header.strapline %></p>
+			<p id="header_url"><a href="http://<%=h header.url %>" title="<%=h header.url %>"><%=h header.url %></a></p>
+			<p class="rss"><a href="/news.rss" title="Subscribe to our rss feed">Subscribe to our RSS feed</a></p>
+			<%= image_tag(header.photo.url('large')) %>
+		</div>
+	
+		<% end %>
+	
+	</div>
+  
+<% else %>
+
+	<div id="branding">
+  	<a href="/" id="logo" title="return to homepage"><img src="/skin/logo.jpg" alt="Company logo" /></a>
+  	<p id="strapline">Strapline Here</p>
+  	<p class="rss"><a href="/news.rss" title="Subscribe to our rss feed">Subscribe to our RSS feed</a></p>
+	</div>
+
+<% end %>
+
+
+
+
+

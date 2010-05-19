@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
     
   
-  before_filter :set_charset
+  before_filter :set_charset, :load_headers
 
 	def render_not_found
 		render :file => RAILS_ROOT + "/public/404.html", :status => "404 Not Found"
@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
   def set_charset
     headers["Content-Type"] = "text/html; charset=UTF-8" 
   end
+  
+  def load_headers
+  	@headers = Header.visible
+ 	end
 
   # get all params that aren't blank and whose keys corespond to supplied valid_keys
   def build_search_filters(valid_keys)

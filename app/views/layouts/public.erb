@@ -17,6 +17,9 @@
 <![endif]-->
 <link rel="stylesheet" href="/stylesheets/print.css" type="text/css" media="print" />
 <!-- Javascript -->
+<%= javascript_include_tag '/javascripts/jquery-1.3.2.min.js' %>
+<%= javascript_include_tag '/javascripts/jquery.cycle.all.min.js' %>
+
 <%= yield :head %>
 </head>
 <% 
@@ -25,11 +28,9 @@
 %>
 <body id="<%= @body_id %>" class="<%= @body_class %>">
 <div id="wrap">
-  <div id="branding"> 
-  	<a href="/" id="logo" title="return to homepage"><img src="/skin/logo.jpg" alt="Company logo" /></a>
-    <p id="strapline">Strapline Here</p>
-	<p class="rss"><a href="/news.rss" title="Subscribe to our rss feed">Subscribe to our RSS feed</a></p>
-  </div>
+  
+  <%= render :partial => "headers" %>
+  
 	<%= render_global_nav %>
   <div id="content_main">
   	<%= render_breadcrumb %>
@@ -49,5 +50,10 @@
   </div>
 <p class="built">site by <a id="bs" href="http://www.bluestormnewmedia.co.uk" title="Visit the bluestorm website"><img src="/skin/bslogo.jpg"/></a></p>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('#slideshow').cycle({ timeout: 3000, cleartype: 1, speed: 3000 });
+	});
+</script>
 </body>
 </html>

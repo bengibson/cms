@@ -1,0 +1,5 @@
+<% form_for [:admin, @header], :html => {:multipart => true} do |header_form| %>
+
+<%= render :partial => 'form', :locals => { :header_form => header_form } %>
+
+<% end %>
